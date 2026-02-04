@@ -50,6 +50,3 @@ nb-configuration.xml
 **/UserController.java
 **/UserService.java
 **/UserRepository.java
-**/ObjectNotFoundException.java
-**/ObjectNotFoundMapper.java
-**/ProductController.java
