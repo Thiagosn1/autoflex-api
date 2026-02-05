@@ -5,7 +5,7 @@ import java.util.UUID;
 import br.com.autoflex.entity.RawMaterial;
 import br.com.autoflex.service.RawMaterialService;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Default;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -31,7 +31,7 @@ public class RawMaterialController {
     }
 
     @POST
-    public Response newRawMaterial(RawMaterial rawMaterial) {
+    public Response newRawMaterial(@Valid RawMaterial rawMaterial) {
         return Response.status(Response.Status.CREATED).entity(rawMaterialService.newRawMaterial(rawMaterial)).build();
     }
 
@@ -50,7 +50,8 @@ public class RawMaterialController {
 
     @PUT
     @Path("/{rawMaterialId}")
-    public Response updateRawMaterial(@PathParam("rawMaterialId") UUID rawMaterialId, RawMaterial updatedRawMaterial) {
+    public Response updateRawMaterial(@PathParam("rawMaterialId") UUID rawMaterialId,
+            @Valid RawMaterial updatedRawMaterial) {
         return Response.ok(rawMaterialService.updateRawMaterial(rawMaterialId, updatedRawMaterial)).build();
     }
 

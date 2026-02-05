@@ -37,7 +37,6 @@ public class ProductService {
         currentProduct.setCode(product.getCode());
         currentProduct.setName(product.getName());
         currentProduct.setPrice(product.getPrice());
-        productRepository.persist(currentProduct);
         return currentProduct;
     }
 

@@ -50,3 +50,8 @@ nb-configuration.xml
 **/UserController.java
 **/UserService.java
 **/UserRepository.java
+
+
+# Docker compose
+docker-compose.yml
+

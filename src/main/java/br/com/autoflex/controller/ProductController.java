@@ -5,6 +5,7 @@ import java.util.UUID;
 import br.com.autoflex.entity.Product;
 import br.com.autoflex.service.ProductService;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -30,7 +31,7 @@ public class ProductController {
     }
 
     @POST
-    public Response newProduct(Product product) {
+    public Response newProduct(@Valid Product product) {
         return Response.status(Response.Status.CREATED).entity(productService.newProduct(product)).build();
     }
 
@@ -49,7 +50,7 @@ public class ProductController {
 
     @PUT
     @Path("/{productId}")
-    public Response updateProduct(@PathParam("productId") UUID productId, Product updatedProduct) {
+    public Response updateProduct(@PathParam("productId") UUID productId, @Valid Product updatedProduct) {
         return Response.ok(productService.updateProduct(productId, updatedProduct)).build();
     }
 

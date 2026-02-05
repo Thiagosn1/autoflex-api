@@ -37,7 +37,6 @@ public class RawMaterialService {
         currentRawMaterial.setCode(rawMaterial.getCode());
         currentRawMaterial.setName(rawMaterial.getName());
         currentRawMaterial.setQuantityInStock(rawMaterial.getQuantityInStock());
-        rawMaterialRepository.persist(currentRawMaterial);
         return currentRawMaterial;
     }
 
