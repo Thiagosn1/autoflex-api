@@ -2,7 +2,7 @@ package br.com.autoflex.controller;
 
 import java.util.UUID;
 
-import br.com.autoflex.entity.RawMaterial;
+import br.com.autoflex.dto.request.RawMaterialRequestDTO;
 import br.com.autoflex.service.RawMaterialService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.validation.Valid;
@@ -31,13 +31,15 @@ public class RawMaterialController {
     }
 
     @POST
-    public Response newRawMaterial(@Valid RawMaterial rawMaterial) {
-        return Response.status(Response.Status.CREATED).entity(rawMaterialService.newRawMaterial(rawMaterial)).build();
+    public Response newRawMaterial(@Valid RawMaterialRequestDTO dto) {
+        return Response.status(Response.Status.CREATED)
+                .entity(rawMaterialService.newRawMaterial(dto))
+                .build();
     }
 
     @GET
-    public Response listRawMaterials(@QueryParam("pageSize") @DefaultValue("10") Integer pageSize,
-
+    public Response listRawMaterials(
+            @QueryParam("pageSize") @DefaultValue("10") Integer pageSize,
             @QueryParam("pageNumber") @DefaultValue("0") Integer pageNumber) {
         return Response.ok(rawMaterialService.listRawMaterials(pageNumber, pageSize)).build();
     }
@@ -50,9 +52,10 @@ public class RawMaterialController {
 
     @PUT
     @Path("/{rawMaterialId}")
-    public Response updateRawMaterial(@PathParam("rawMaterialId") UUID rawMaterialId,
-            @Valid RawMaterial updatedRawMaterial) {
-        return Response.ok(rawMaterialService.updateRawMaterial(rawMaterialId, updatedRawMaterial)).build();
+    public Response updateRawMaterial(
+            @PathParam("rawMaterialId") UUID rawMaterialId,
+            @Valid RawMaterialRequestDTO dto) {
+        return Response.ok(rawMaterialService.updateRawMaterial(rawMaterialId, dto)).build();
     }
 
     @DELETE
@@ -60,7 +63,6 @@ public class RawMaterialController {
     public Response deleteRawMaterial(@PathParam("rawMaterialId") UUID rawMaterialId) {
         rawMaterialService.deleteRawMaterial(rawMaterialId);
         return Response.noContent().build();
-
     }
 
 }

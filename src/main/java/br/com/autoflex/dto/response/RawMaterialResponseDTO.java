@@ -1,30 +1,23 @@
-package br.com.autoflex.entity;
+package br.com.autoflex.dto.response;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "tb_raw_materials")
-public class RawMaterial {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class RawMaterialResponseDTO {
     private UUID id;
-
-    @Column(unique = true, nullable = false)
     private String code;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private BigDecimal quantityInStock;
+
+    public RawMaterialResponseDTO() {
+    }
+
+    public RawMaterialResponseDTO(UUID id, String code, String name, BigDecimal quantityInStock) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.quantityInStock = quantityInStock;
+    }
 
     public UUID getId() {
         return id;

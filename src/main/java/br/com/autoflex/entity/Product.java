@@ -1,17 +1,18 @@
 package br.com.autoflex.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "tb_products")
@@ -21,16 +22,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank(message = "Code is required")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String code;
 
-    @NotBlank(message = "Name is required")
+    @Column(nullable = false)
     private String name;
 
-    @NotNull(message = "Price is required")
-    @Positive(message = "Price must be positive")
+    @Column(nullable = false)
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductRawMaterial> rawMaterials = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -60,4 +62,21 @@ public class Product {
         this.price = price;
     }
 
+    public List<ProductRawMaterial> getRawMaterials() {
+        return rawMaterials;
+    }
+
+    public void setRawMaterials(List<ProductRawMaterial> rawMaterials) {
+        this.rawMaterials = rawMaterials;
+    }
+
+    public void addRawMaterial(ProductRawMaterial productRawMaterial) {
+        rawMaterials.add(productRawMaterial);
+        productRawMaterial.setProduct(this);
+    }
+
+    public void removeRawMaterial(ProductRawMaterial productRawMaterial) {
+        rawMaterials.remove(productRawMaterial);
+        productRawMaterial.setProduct(null);
+    }
 }

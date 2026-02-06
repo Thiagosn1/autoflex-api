@@ -2,7 +2,7 @@ package br.com.autoflex.controller;
 
 import java.util.UUID;
 
-import br.com.autoflex.entity.Product;
+import br.com.autoflex.dto.request.ProductRequestDTO;
 import br.com.autoflex.service.ProductService;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.validation.Valid;
@@ -31,13 +31,13 @@ public class ProductController {
     }
 
     @POST
-    public Response newProduct(@Valid Product product) {
-        return Response.status(Response.Status.CREATED).entity(productService.newProduct(product)).build();
+    public Response newProduct(@Valid ProductRequestDTO dto) {
+        return Response.status(Response.Status.CREATED).entity(productService.newProduct(dto)).build();
     }
 
     @GET
-    public Response listProducts(@QueryParam("pageSize") @DefaultValue("10") Integer pageSize,
-
+    public Response listProducts(
+            @QueryParam("pageSize") @DefaultValue("10") Integer pageSize,
             @QueryParam("pageNumber") @DefaultValue("0") Integer pageNumber) {
         return Response.ok(productService.listProducts(pageNumber, pageSize)).build();
     }
@@ -50,8 +50,10 @@ public class ProductController {
 
     @PUT
     @Path("/{productId}")
-    public Response updateProduct(@PathParam("productId") UUID productId, @Valid Product updatedProduct) {
-        return Response.ok(productService.updateProduct(productId, updatedProduct)).build();
+    public Response updateProduct(
+            @PathParam("productId") UUID productId,
+            @Valid ProductRequestDTO dto) {
+        return Response.ok(productService.updateProduct(productId, dto)).build();
     }
 
     @DELETE
