@@ -1,78 +1,198 @@
 # autoflex-api
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este projeto utiliza **Quarkus**, o Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Documentação oficial do Quarkus: [https://quarkus.io/](https://quarkus.io/)
 
-## Running the application in dev mode
+---
 
-You can run your application in dev mode that enables live coding using:
+## Pré-requisitos
 
-```shell script
+Antes de rodar a API, certifique-se de ter os seguintes itens instalados:
+
+* Docker
+* Docker Compose
+* Java 17+
+
+---
+
+## 1. Instalação e configuração do Docker
+
+### Windows
+
+1. Baixe o **Docker Desktop** em: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+2. Execute o instalador e siga as instruções padrão.
+3. Durante a instalação, mantenha habilitada a opção de usar **WSL 2**.
+
+Após a instalação, reinicie o computador e verifique no terminal:
+
+```bash
+docker --version
+docker compose version
+```
+
+---
+
+### Linux (Ubuntu/Debian)
+
+```bash
+sudo apt update
+sudo apt install -y docker.io docker-compose-plugin
+```
+
+Inicie e habilite o Docker:
+
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+Opcionalmente, adicione seu usuário ao grupo docker para não precisar usar sudo:
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+Após isso, reinicie a sessão.
+
+Verifique a instalação:
+
+```bash
+docker --version
+docker compose version
+```
+
+---
+
+## 2. Subindo os containers com Docker Compose
+
+Na raiz do projeto, onde está localizado o arquivo `docker-compose.yml`, execute:
+
+```bash
+docker compose up -d
+```
+
+Esse comando irá subir os serviços necessários (ex: banco de dados).
+
+Para verificar se os containers estão em execução:
+
+```bash
+docker compose ps
+```
+
+---
+
+## 3. Instalação do Quarkus (Quarkus CLI)
+
+O Quarkus pode ser utilizado via **Maven Wrapper**, não sendo obrigatória a instalação da CLI. Ainda assim, segue a opção:
+
+### Instalando a Quarkus CLI
+
+```bash
+sdk install quarkus
+```
+
+> É necessário ter o **SDKMAN** instalado: [https://sdkman.io/](https://sdkman.io/)
+
+Verifique a instalação:
+
+```bash
+quarkus --version
+```
+
+---
+
+## 4. Rodando a aplicação Quarkus em modo desenvolvimento
+
+Com os containers ativos, execute:
+
+```bash
 ./mvnw quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+A aplicação ficará disponível em:
 
-## Packaging and running the application
+```
+http://localhost:8080
+```
 
-The application can be packaged using:
+A interface de desenvolvimento do Quarkus (Dev UI) pode ser acessada em:
 
-```shell script
+```
+http://localhost:8080/q/dev/
+```
+
+---
+
+## Rodando o frontend da aplicação
+
+Após configurar e rodar a **API**, o frontend da aplicação deve ser executado separadamente.
+
+O frontend está disponível neste repositório:
+
+[https://github.com/Thiagosn1/autoflex-frontend](https://github.com/Thiagosn1/autoflex-frontend)
+
+As instruções completas de instalação e execução do frontend estão descritas no README do próprio repositório.
+
+Certifique-se apenas de que a API esteja em execução em `http://localhost:8080` para que a integração funcione corretamente.
+
+---
+
+## Build e execução da aplicação
+
+### Gerando o pacote da aplicação
+
+```bash
 ./mvnw package
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+O arquivo `quarkus-run.jar` será gerado em:
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+```
+target/quarkus-app/
+```
 
-If you want to build an _über-jar_, execute the following command:
+Execute com:
 
-```shell script
+```bash
+java -jar target/quarkus-app/quarkus-run.jar
+```
+
+---
+
+## Criando um JAR Uber
+
+```bash
 ./mvnw package -Dquarkus.package.jar.type=uber-jar
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+Execute com:
 
-## Creating a native executable
+```bash
+java -jar target/*-runner.jar
+```
 
-You can create a native executable using:
+---
 
-```shell script
+## Executável nativo
+
+```bash
 ./mvnw package -Dnative
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+Ou, sem GraalVM instalado:
 
-```shell script
+```bash
 ./mvnw package -Dnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/autoflex-api-1.0.0-SNAPSHOT-runner`
+O executável será gerado em `target/`.
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+---
 
-## Related Guides
+## Guias relacionados
 
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- JDBC Driver - MySQL ([guide](https://quarkus.io/guides/datasource)): Connect to the MySQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+* REST: [https://quarkus.io/guides/rest](https://quarkus.io/guides/rest)
+* REST Jackson: [https://quarkus.io/guides/rest#json-serialisation](https://quarkus.io/guides/rest#json-serialisation)
+* Hibernate ORM com Panache: [https://quarkus.io/guides/hibernate-orm-panache](https://quarkus.io/guides/hibernate-orm-panache)
+* JDBC MySQL: [https://quarkus.io/guides/datasource](https://quarkus.io/guides/datasource)
