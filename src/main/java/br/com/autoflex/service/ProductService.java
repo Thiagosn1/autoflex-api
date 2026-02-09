@@ -2,8 +2,6 @@ package br.com.autoflex.service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 import br.com.autoflex.dto.mapper.ProductMapper;
 import br.com.autoflex.dto.request.ProductRequestDTO;
 import br.com.autoflex.dto.response.ProductResponseDTO;
@@ -12,6 +10,7 @@ import br.com.autoflex.exception.ObjectNotFoundException;
 import br.com.autoflex.repository.ProductRepository;
 import jakarta.enterprise.context.Dependent;
 import jakarta.transaction.Transactional;
+import io.quarkus.panache.common.Page;
 
 @Dependent
 public class ProductService {
@@ -30,13 +29,17 @@ public class ProductService {
         return productMapper.toResponseDTO(product);
     }
 
-    public List<ProductResponseDTO> listProducts(Integer pageNumber, Integer pageSize) {
+    public List<Product> listProducts(Integer pageNumber, Integer pageSize) {
+        if (pageNumber == null && pageSize == null) {
+            return productRepository.listAll();
+        }
+
+        int pn = (pageNumber != null) ? pageNumber : 0;
+        int ps = (pageSize != null) ? pageSize : 10;
+
         return productRepository.findAll()
-                .page(pageNumber, pageSize)
-                .list()
-                .stream()
-                .map(productMapper::toResponseDTO)
-                .collect(Collectors.toList());
+                .page(Page.of(pn, ps))
+                .list();
     }
 
     public ProductResponseDTO listProduct(UUID productId) {

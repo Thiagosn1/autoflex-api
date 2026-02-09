@@ -8,7 +8,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -39,8 +38,8 @@ public class RawMaterialController {
 
     @GET
     public Response listRawMaterials(
-            @QueryParam("pageSize") @DefaultValue("10") Integer pageSize,
-            @QueryParam("pageNumber") @DefaultValue("0") Integer pageNumber) {
+            @QueryParam("pageSize") Integer pageSize,
+            @QueryParam("pageNumber") Integer pageNumber) {
         return Response.ok(rawMaterialService.listRawMaterials(pageNumber, pageSize)).build();
     }
 

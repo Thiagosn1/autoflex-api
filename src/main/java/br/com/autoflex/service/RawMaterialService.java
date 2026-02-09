@@ -2,8 +2,6 @@ package br.com.autoflex.service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
 import br.com.autoflex.dto.mapper.RawMaterialMapper;
 import br.com.autoflex.dto.request.RawMaterialRequestDTO;
 import br.com.autoflex.dto.response.RawMaterialResponseDTO;
@@ -12,6 +10,7 @@ import br.com.autoflex.exception.ObjectNotFoundException;
 import br.com.autoflex.repository.RawMaterialRepository;
 import jakarta.enterprise.context.Dependent;
 import jakarta.transaction.Transactional;
+import io.quarkus.panache.common.Page;
 
 @Dependent
 public class RawMaterialService {
@@ -30,13 +29,17 @@ public class RawMaterialService {
         return rawMaterialMapper.toResponseDTO(rawMaterial);
     }
 
-    public List<RawMaterialResponseDTO> listRawMaterials(Integer pageNumber, Integer pageSize) {
+    public List<RawMaterial> listRawMaterials(Integer pageNumber, Integer pageSize) {
+        if (pageNumber == null && pageSize == null) {
+            return rawMaterialRepository.listAll();
+        }
+
+        int pn = (pageNumber != null) ? pageNumber : 0;
+        int ps = (pageSize != null) ? pageSize : 10;
+
         return rawMaterialRepository.findAll()
-                .page(pageNumber, pageSize)
-                .list()
-                .stream()
-                .map(rawMaterialMapper::toResponseDTO)
-                .collect(Collectors.toList());
+                .page(Page.of(pn, ps))
+                .list();
     }
 
     public RawMaterialResponseDTO listRawMaterial(UUID rawMaterialId) {
