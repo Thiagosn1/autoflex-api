@@ -23,7 +23,7 @@ INSERT INTO tb_products (id, code, name, price) VALUES
 (UUID_TO_BIN(UUID()), 'PROD010', 'Mesa de Centro em Vidro', 890.00),
 (UUID_TO_BIN(UUID()), 'PROD011', 'Poltrona Reclinável', 950.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD001'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP001'), 8.00),
@@ -34,7 +34,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD001'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP003'), 12.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD002'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP004'), 6.00),
@@ -42,7 +42,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD002'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP007'), 48.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD003'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP006'), 4.00),
@@ -50,7 +50,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD003'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP010'), 4.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD004'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP008'), 18.50),
@@ -58,7 +58,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD004'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP007'), 35.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD005'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP003'), 4.00),
@@ -69,7 +69,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD005'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP005'), 0.75);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD006'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP010'), 6.00),
@@ -77,7 +77,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD006'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP009'), 2.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD007'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP003'), 8.00),
@@ -85,7 +85,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD007'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP010'), 5.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD008'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP001'), 4.00),
@@ -93,7 +93,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD008'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP006'), 2.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD009'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP002'), 4.00),
@@ -104,7 +104,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD009'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP007'), 32.00);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD010'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP004'), 4.00),
@@ -112,7 +112,7 @@ INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_
  (SELECT id FROM tb_products WHERE code = 'PROD010'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP005'), 1.20);
 
-INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantity_required) VALUES
+INSERT INTO tb_product_raw_materials (id, product_id, raw_material_id, quantityRequired) VALUES
 (UUID_TO_BIN(UUID()), 
  (SELECT id FROM tb_products WHERE code = 'PROD011'),
  (SELECT id FROM tb_raw_materials WHERE code = 'MP009'), 1.00),
